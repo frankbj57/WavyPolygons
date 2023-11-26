@@ -29,7 +29,7 @@ public:
 		// Number of corners in the polygon
 		if (GetKey(olc::Key::DOWN).bPressed)
 		{
-			nbPoints -= (nbPoints >= 3 ? 1 : 0);
+			nbPoints -= (nbPoints > 3 ? 1 : 0);
 			std::cout << "Polygonhjørner: " << nbPoints << endl;
 		}
 		if (GetKey(olc::Key::UP).bPressed)
@@ -72,6 +72,18 @@ public:
 		{
 			maxRadius += 25;
 			std::cout << "maximum radius: " << maxRadius << endl;
+		}
+
+		// Waves going out
+		if (GetKey(olc::Key::S).bPressed)
+		{
+			nWaves--;
+			std::cout << "num waves: " << nWaves << endl;
+		}
+		if (GetKey(olc::Key::W).bPressed)
+		{
+			nWaves++;
+			std::cout << "num waves: " << nWaves << endl;
 		}
 
 		// Drawing here
@@ -131,7 +143,8 @@ private:
 
 		for (int i = 1; i < numPoints; i++)
 		{
-			angle = -M_PI / 2 + i * 2.0 * M_PI / numPoints + rotation;
+			// angle = -M_PI / 2 + i * 2.0 * M_PI / numPoints + rotation;
+			angle += 2.0 * M_PI / numPoints;
 
 			double nextX = centerX + cos(angle) * radius;
 			double nextY = centerY + sin(angle) * radius;
